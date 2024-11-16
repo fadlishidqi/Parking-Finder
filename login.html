@@ -14,12 +14,12 @@
            <div class="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-blue-500 to-indigo-600 p-12 flex-col justify-center items-center">
                <div class="text-white text-9xl font-bold mb-8">P</div>
                <div class="text-white mt-8 text-center">
-                   <h2 class="text-3xl font-bold mb-3">Welcome Back!</h2>
-                   <p class="text-blue-100">Enter your PIN to access the parking management system</p>
+                   <h2 class="text-3xl font-bold mb-3" id="welcomeText">Welcome Back!</h2>
+                   <p class="text-blue-100" id="welcomeDescription">Enter your PIN to access the parking management system</p>
                </div>
            </div>
 
-           <!-- Right Side - Login Form -->
+           <!-- Right Side - Login/Register Form -->
            <div class="w-full lg:w-1/2 p-8 md:p-12">
                <div class="text-center mb-10">
                    <h3 class="text-3xl font-bold text-gray-800">Parking Finder</h3>
@@ -28,6 +28,7 @@
 
                <div id="errorMessage" class="hidden transform -translate-y-1 transition-all duration-300 bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded-md mb-6"></div>
 
+               <!-- Login Form -->
                <form id="loginForm" class="space-y-6">
                    <div>
                        <label class="block text-sm font-medium text-gray-700 mb-2">Security PIN</label>
@@ -52,7 +53,60 @@
                            class="w-full py-3 px-6 rounded-lg bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-medium text-lg hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transform transition-all duration-200 hover:scale-[1.02]">
                        Login
                    </button>
+
+                   <div class="text-center">
+                       <p class="text-gray-600">Don't have an account? 
+                           <button type="button" id="showRegister" class="text-blue-600 font-semibold hover:text-blue-800">Register</button>
+                       </p>
+                   </div>
                </form>
+
+               <!-- Register Form -->
+                <form id="registerForm" class="space-y-6 hidden">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
+                        <input type="text" 
+                            id="regName" 
+                            placeholder="Enter your full name"
+                            class="block w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:ring-opacity-20 transition-colors text-gray-700 bg-gray-50 hover:bg-white" 
+                            required>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Create PIN</label>
+                        <input type="password" 
+                            id="regPin" 
+                            maxlength="6"
+                            pattern="[0-9]*"
+                            inputmode="numeric"
+                            placeholder="Create 6-digit PIN"
+                            class="block w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:ring-opacity-20 transition-colors text-gray-700 bg-gray-50 hover:bg-white" 
+                            required>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Confirm PIN</label>
+                        <input type="password" 
+                            id="regPinConfirm" 
+                            maxlength="6"
+                            pattern="[0-9]*"
+                            inputmode="numeric"
+                            placeholder="Confirm 6-digit PIN"
+                            class="block w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:ring-opacity-20 transition-colors text-gray-700 bg-gray-50 hover:bg-white" 
+                            required>
+                    </div>
+
+                    <button type="submit" 
+                            class="w-full py-3 px-6 rounded-lg bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-medium text-lg hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transform transition-all duration-200 hover:scale-[1.02]">
+                        Register
+                    </button>
+
+                    <div class="text-center">
+                        <p class="text-gray-600">Already have an account? 
+                            <button type="button" id="showLogin" class="text-blue-600 font-semibold hover:text-blue-800">Login</button>
+                        </p>
+                    </div>
+                </form>
 
                <div class="mt-8 text-center text-sm text-gray-500">
                    <p>Protected by advanced security protocols</p>
@@ -95,6 +149,23 @@
            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
        }
    </style>
+
+   <script>
+       // Simple form toggle functionality
+       document.getElementById('showRegister').addEventListener('click', function() {
+           document.getElementById('loginForm').classList.add('hidden');
+           document.getElementById('registerForm').classList.remove('hidden');
+           document.getElementById('welcomeText').textContent = 'Welcome!';
+           document.getElementById('welcomeDescription').textContent = 'Create an account to access the parking management system';
+       });
+
+       document.getElementById('showLogin').addEventListener('click', function() {
+           document.getElementById('registerForm').classList.add('hidden');
+           document.getElementById('loginForm').classList.remove('hidden');
+           document.getElementById('welcomeText').textContent = 'Welcome Back!';
+           document.getElementById('welcomeDescription').textContent = 'Enter your PIN to access the parking management system';
+       });
+   </script>
 
    <script src="js/auth.js"></script>
 </body>
